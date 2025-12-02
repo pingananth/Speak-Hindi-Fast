@@ -40,3 +40,14 @@
     font-size: 0.875rem;
     color: #6b7280;
 }
+
+.authorInfo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.avatar {
+    border-radius: 50%;
+    object-fit: cover;
+}

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
@@ -12,9 +13,9 @@ export default function Hero() {
                     unlock practical fluency. Perfect for professionals, students, and
                     travelers who need fast, real-world results.
                 </p>
-                <button className={`btn-primary ${styles.cta}`}>
+                <Link href="/course" className={`btn-primary ${styles.cta}`}>
                     Start Free lesson
-                </button>
+                </Link>
             </div>
         </section>
     );

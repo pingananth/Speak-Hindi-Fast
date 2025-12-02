@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { lessons } from "@/data/lessons";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -22,7 +23,7 @@ export default function CoursePage() {
 
                 <div className={styles.grid}>
                     {lessons.map((lesson) => (
-                        <div key={lesson.id} className={styles.card}>
+                        <Link href={`/course/${lesson.slug}`} key={lesson.id} className={styles.card}>
                             <span className={styles.lessonNumber}>Lesson {lesson.id}</span>
                             <h2 className={styles.lessonTitle}>{lesson.title}</h2>
                             <p className={styles.lessonDescription}>{lesson.description}</p>
@@ -41,7 +42,7 @@ export default function CoursePage() {
                                 </svg>
                                 {lesson.duration} minutes
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </main>

@@ -21,11 +21,11 @@ export default function Navbar() {
                             Course
                         </Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link href="/blog" className={styles.link}>
                             Blog
                         </Link>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
         </nav>

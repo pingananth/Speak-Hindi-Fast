@@ -3,6 +3,8 @@ import { Inter, Poppins, Roboto } from "next/font/google";
 import "./globals.css";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 
+import FeedbackWidget from "@/components/FeedbackWidget";
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -41,6 +43,7 @@ export default function RootLayout({
       >
         <GoogleAnalytics />
         {children}
+        <FeedbackWidget />
       </body>
     </html>
   );

@@ -1,0 +1,140 @@
+import { lessons } from "@/data/lessons";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import styles from "./lesson.module.css";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+
+interface PageProps {
+    params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+    return lessons.map((lesson) => ({
+        slug: lesson.slug,
+    }));
+}
+
+export async function generateMetadata({ params }: PageProps) {
+    const { slug } = await params;
+    const lesson = lessons.find((l) => l.slug === slug);
+    if (!lesson) return { title: "Lesson Not Found" };
+    return {
+        title: `${lesson.title} | Speak Hindi Fast`,
+        description: lesson.description,
+    };
+}
+
+export default async function LessonPage({ params }: PageProps) {
+    const { slug } = await params;
+    const lesson = lessons.find((l) => l.slug === slug);
+
+    if (!lesson) {
+        notFound();
+    }
+
+    // Find next and previous lessons
+    const currentIndex = lessons.findIndex((l) => l.id === lesson.id);
+    const prevLesson = lessons[currentIndex - 1];
+    const nextLesson = lessons[currentIndex + 1];
+
+    // JSON-LD Schema for VideoObject
+    const videoSchema = {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": lesson.title,
+        "description": lesson.description,
+        "thumbnailUrl": `https://vumbnail.com/${lesson.vimeoId}.jpg`,
+        "uploadDate": new Date().toISOString(),
+        "contentUrl": `https://player.vimeo.com/video/${lesson.vimeoId}`,
+        "embedUrl": `https://player.vimeo.com/video/${lesson.vimeoId}`,
+    };
+
+    // JSON-LD Schema for LearningResource
+    const learningResourceSchema = {
+        "@context": "https://schema.org",
+        "@type": "LearningResource",
+        "name": lesson.title,
+        "description": lesson.description,
+        "educationalLevel": "Beginner",
+        "learningResourceType": "Video Lesson",
+        "timeRequired": `PT${lesson.duration}M`,
+    };
+
+    return (
+        <>
+            {/* JSON-LD Structured Data */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(learningResourceSchema) }}
+            />
+
+            <Navbar />
+            <main className={styles.container}>
+                <div className={styles.header}>
+                    <Link href="/course" className={styles.backLink}>
+                        ← Back to Course
+                    </Link>
+                    <h1 className={styles.title}>{lesson.title}</h1>
+                    <div className={styles.meta}>
+                        <span>{lesson.duration} mins</span>
+                    </div>
+                </div>
+
+                {/* Introduction Section */}
+                <section className={styles.section}>
+                    <div className={styles.sectionTitle}>Introduction</div>
+                    <div
+                        className={styles.content}
+                        dangerouslySetInnerHTML={{ __html: lesson.introduction || "<p>No introduction available.</p>" }}
+                    />
+                </section>
+
+                {/* Vimeo Video Widget */}
+                {lesson.vimeoId && (
+                    <div className={styles.videoWrapper}>
+                        <iframe
+                            src={`https://player.vimeo.com/video/${lesson.vimeoId}?badge=0&autopause=0&player_id=0&app_id=58479`}
+                            frameBorder="0"
+                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                            title={lesson.title}
+                        ></iframe>
+                    </div>
+                )}
+
+                {/* Notes / Activity Section */}
+                <section className={styles.section}>
+                    <div className={styles.sectionTitle}>Notes & Activities</div>
+                    <div
+                        className={styles.content}
+                        dangerouslySetInnerHTML={{ __html: lesson.notes || "<p>No notes available.</p>" }}
+                    />
+                </section>
+
+                {/* Navigation */}
+                <div className={styles.navigation}>
+                    {prevLesson ? (
+                        <Link href={`/course/${prevLesson.slug}`} className={styles.navButton}>
+                            ← {prevLesson.title}
+                        </Link>
+                    ) : (
+                        <div></div> // Spacer
+                    )}
+
+                    {nextLesson ? (
+                        <Link href={`/course/${nextLesson.slug}`} className={styles.navButton}>
+                            {nextLesson.title} →
+                        </Link>
+                    ) : (
+                        <div></div> // Spacer
+                    )}
+                </div>
+            </main>
+            <Footer />
+        </>
+    );
+}

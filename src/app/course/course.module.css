@@ -43,6 +43,8 @@
   border: 1px solid #eee;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  color: inherit;
 }
 
 .card:hover {
