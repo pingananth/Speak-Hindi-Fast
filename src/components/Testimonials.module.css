@@ -1,0 +1,42 @@
+.testimonials {
+    padding: 4rem 0;
+}
+
+.heading {
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: #111827;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: #fff;
+    padding: 2rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+}
+
+.quote {
+    font-style: italic;
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.author {
+    font-weight: 600;
+    color: #1f2937;
+    font-family: var(--font-inter);
+}
+
+.role {
+    font-size: 0.875rem;
+    color: #6b7280;
+}

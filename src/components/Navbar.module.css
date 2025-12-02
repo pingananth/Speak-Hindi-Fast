@@ -1,0 +1,40 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.logo {
+    font-family: var(--font-inter);
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.menu {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.link {
+    font-weight: 500;
+    color: var(--text-color);
+    transition: color 0.2s;
+}
+
+.link:hover {
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .menu {
+        display: none;
+        /* Simple mobile hide for now, or hamburger */
+    }
+}

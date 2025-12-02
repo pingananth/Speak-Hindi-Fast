@@ -1,0 +1,38 @@
+.hero {
+    padding: 4rem 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.title {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    font-weight: 800;
+    color: #111827;
+    max-width: 800px;
+}
+
+.subtext {
+    font-size: 1.25rem;
+    color: #4b5563;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.cta {
+    font-size: 1.125rem;
+    padding: 1rem 2rem;
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .hero {
+        padding: 3rem 0;
+    }
+}
