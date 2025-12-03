@@ -1,15 +1,28 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import { lessons } from "@/data/lessons";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import NotifyModal from "@/components/NotifyModal";
 import styles from "./course.module.css";
 
-export const metadata = {
-    title: "Course Curriculum | Speak Hindi Fast",
-    description: "Explore our structured 30-day Hindi speaking course curriculum. From basic sounds to complex sentences.",
-};
-
 export default function CoursePage() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleCTAClick = () => {
+        setIsModalOpen(true);
+
+        // Track CTA click in GA
+        if (typeof window !== "undefined" && (window as any).gtag) {
+            (window as any).gtag("event", "cta_click", {
+                event_category: "engagement",
+                event_label: "want_more_lessons",
+            });
+        }
+    };
+
     return (
         <>
             <Navbar />
@@ -45,8 +58,21 @@ export default function CoursePage() {
                         </Link>
                     ))}
                 </div>
+
+                {/* CTA Section */}
+                <div className={styles.ctaSection}>
+                    <h2 className={styles.ctaTitle}>Want More Lessons?</h2>
+                    <p className={styles.ctaText}>
+                        We're adding new lessons regularly. Get notified when they're available!
+                    </p>
+                    <button onClick={handleCTAClick} className={styles.ctaButton}>
+                        I Want More Lessons
+                    </button>
+                </div>
             </main>
             <Footer />
+
+            <NotifyModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </>
     );
 }

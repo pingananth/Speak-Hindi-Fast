@@ -1,6 +1,7 @@
 import { lessons } from "@/data/lessons";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import DownloadButton from "@/components/DownloadButton";
 import styles from "./lesson.module.css";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -113,6 +114,19 @@ export default async function LessonPage({ params }: PageProps) {
                         className={styles.content}
                         dangerouslySetInnerHTML={{ __html: lesson.notes || "<p>No notes available.</p>" }}
                     />
+
+                    {/* Downloads Section */}
+                    {lesson.downloads && lesson.downloads.length > 0 && (
+                        <div className={styles.downloads}>
+                            {lesson.downloads.map((download, index) => (
+                                <DownloadButton
+                                    key={index}
+                                    label={download.label}
+                                    url={download.url}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </section>
 
                 {/* Navigation */}
