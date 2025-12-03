@@ -18,7 +18,7 @@ export const lessons: Lesson[] = [
     {
         id: 1,
         slug: "introduction-to-hindi-pronouns",
-        title: "Learn Hindi Pronouns: Introduction to Hindi Pronouns for Beginners",
+        title: "Hindi Pronouns in English for Beginners",
         description: "Learn Hindi pronouns in English with this beginner-friendly lesson. Master Main, Tum, Aap, and Vah to start speaking Hindi confidently. No script needed!",
         duration: 5,
         introduction: `
@@ -63,7 +63,7 @@ export const lessons: Lesson[] = [
     {
         id: 2,
         slug: "basic-hindi-verbs",
-        title: "Hindi Verbs for Beginners: Basic Hindi Verbs",
+        title: "Basic Hindi Verbs for Daily Conversation",
         description: "Learn essential Hindi verbs for daily conversation. Master common action words through English transliteration. Perfect for beginners learning spoken Hindi.",
         duration: 3,
         introduction: "Start your building blocks here.",
@@ -87,7 +87,7 @@ export const lessons: Lesson[] = [
     {
         id: 3,
         slug: "action-words",
-        title: "Hindi Action Words: Complete Guide",
+        title: "Hindi Action Words & Commands for Beginners",
         description: "Master Hindi action words and learn to give commands naturally. Practice inviting actions in spoken Hindi without the script. Includes worksheet downloads.",
         duration: 5,
         introduction: "Understanding to Invite a 2nd person to Act",
@@ -129,7 +129,7 @@ export const lessons: Lesson[] = [
     {
         id: 4,
         slug: "hindi-sentence-structure",
-        title: "Hindi Sentence Structure",
+        title: "Hindi Sentence Structure: SOV Formula",
         description: "Understand Hindi sentence structure with our simple SOV formula. Learn the 5-part pattern to form Hindi sentences correctly. Master spoken Hindi grammar fast.",
         duration: 5,
         introduction: "Learn the difference between English and Hindi structure to learn to speak hindi.",
