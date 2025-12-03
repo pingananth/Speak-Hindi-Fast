@@ -25,7 +25,7 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "Hindi in English: Learn to Speak Hindi in 30 Days",
-  description: "Learn Hindi through English online with our 30-day course. Master Hindi conversation through English without learning the script. Perfect for professionals and travelers.",
+  description: "Learn Hindi through English online in 30 days. Master Hindi conversation through English without the script. For professionals & travelers.",
   icons: {
     icon: "/icon.svg",
   },
