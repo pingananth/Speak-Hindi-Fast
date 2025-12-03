@@ -23,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Dynamic lesson pages
     const lessonPages = lessons.map((lesson) => ({
         url: `${baseUrl}/course/${lesson.slug}`,
-        lastModified: new Date(),
+        lastModified: lesson.lastUpdated ? new Date(lesson.lastUpdated) : new Date(),
         changeFrequency: 'monthly' as const,
         priority: 0.8,
     }));

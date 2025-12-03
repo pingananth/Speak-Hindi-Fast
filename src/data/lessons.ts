@@ -7,6 +7,7 @@ export interface Lesson {
     introduction: string;
     vimeoId: string;
     notes: string;
+    lastUpdated?: string; // ISO date string (YYYY-MM-DD)
     downloads?: Array<{
         label: string;
         url: string;
@@ -17,7 +18,7 @@ export const lessons: Lesson[] = [
     {
         id: 1,
         slug: "introduction-to-hindi-pronouns",
-        title: "Introduction to Hindi Pronouns",
+        title: "Learn Hindi Pronouns: Introduction to Hindi Pronouns for Beginners",
         description: "Learn the basic sounds of Hindi Pronouns in English.",
         duration: 5,
         introduction: `
@@ -62,7 +63,7 @@ export const lessons: Lesson[] = [
     {
         id: 2,
         slug: "basic-hindi-verbs",
-        title: "Basic Hindi Verbs",
+        title: "Hindi Verbs for Beginners: Basic Hindi Verbs",
         description: "Learn the basic English to Hindi verbs that is used daily",
         duration: 3,
         introduction: "Start your building blocks here.",
@@ -86,7 +87,7 @@ export const lessons: Lesson[] = [
     {
         id: 3,
         slug: "action-words",
-        title: "Action Commands",
+        title: "Hindi Action Words: Complete Guide",
         description: "Learn the basics of how to invite an action in spoken Hindi.",
         duration: 5,
         introduction: "Understanding to Invite a 2nd person to Act",
@@ -125,17 +126,31 @@ export const lessons: Lesson[] = [
             }
         ]
     },
-    /*
     {
         id: 4,
-        slug: "gender-in-hindi",
-        title: "Gender in Hindi",
-        description: "Everything in Hindi has a gender. Learn the rules for masculine and feminine nouns and how they affect verbs.",
-        duration: 30,
-        introduction: "Masculine vs Feminine nouns.",
-        vimeoId: "76979871",
-        notes: "Notes for gender."
+        slug: "hindi-sentence-structure",
+        title: "Hindi Sentence Structure",
+        description: "Learn the basic hindi sentence structure and how to speak it using hindi sentence formation.",
+        duration: 5,
+        introduction: "Learn the difference between English and Hindi structure to learn to speak hindi.",
+        vimeoId: "1143176591",
+        notes: `
+<h3>Activity</h3>
+<ul>
+<li>Observe simple hindi sentences to see the patterns</li>
+<li>Compare english and hindi basic sentences using google translate to see and identify the patterns clearly</li>
+</ul>
+
+<h3>Quiz</h3>
+<ul>
+<li>Is hindi sov or svo? ( SVO = Subject Verb Object & SOV = Subject Object Verb )</li>
+<li>Do you remember the five part formula for hindi sentence formation?</li>
+<li>Map out the hindi sentence formula for 'Hum office jathay hain'/li>
+
+</ul>
+        `
     },
+    /*
     {
         id: 5,
         slug: "present-tense-verbs",

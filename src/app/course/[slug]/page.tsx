@@ -46,7 +46,7 @@ export default async function LessonPage({ params }: PageProps) {
         "name": lesson.title,
         "description": lesson.description,
         "thumbnailUrl": `https://vumbnail.com/${lesson.vimeoId}.jpg`,
-        "uploadDate": new Date().toISOString(),
+        "uploadDate": lesson.lastUpdated ? new Date(lesson.lastUpdated).toISOString() : new Date().toISOString(),
         "contentUrl": `https://player.vimeo.com/video/${lesson.vimeoId}`,
         "embedUrl": `https://player.vimeo.com/video/${lesson.vimeoId}`,
     };

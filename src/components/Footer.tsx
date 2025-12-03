@@ -9,6 +9,7 @@ export default function Footer() {
                     <div className={styles.copyright}>
                         © {new Date().getFullYear()} SpeakHindiFast. All rights reserved.
                     </div>
+                    {/* Temporarily hidden until pages are created
                     <div className={styles.links}>
                         <Link href="/privacy" className={styles.link}>
                             Privacy Policy
@@ -20,6 +21,7 @@ export default function Footer() {
                             Copyright Policy
                         </Link>
                     </div>
+                    */}
                 </div>
             </div>
         </footer>

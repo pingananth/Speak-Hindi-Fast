@@ -6,6 +6,14 @@ import styles from "./FAQ.module.css";
 export default function FAQ() {
     const faqs = [
         {
+            question: "Can I learn Hindi in 30 days?",
+            answer: (
+                <>
+                    Absolutely! With just <strong>15 minutes of daily practice</strong>, you can understand conversations and speak basic Hindi in less than 30 days. Our structured approach helps you build a strong foundation quickly. However, achieving complete fluency and responding effortlessly in real-time conversations will require continued practice beyond the initial 30 days. Think of it as learning to drive — you'll be on the road in a month, but mastery comes with miles of experience.
+                </>
+            ),
+        },
+        {
             question: "What are the prerequisites to start learning spoken Hindi for beginners?",
             answer: (
                 <>

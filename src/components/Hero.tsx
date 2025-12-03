@@ -9,9 +9,9 @@ export default function Hero() {
                     Speak Hindi Fluent in 30 Days: The Formula Way
                 </h1>
                 <p className={styles.subtext}>
-                    The only structured system that eliminates the Hindi script barrier to
-                    unlock practical fluency. Perfect for professionals, students, and
-                    travelers who need fast, real-world results.
+                    Learn Hindi through English online with our structured system designed for
+                    Hindi conversation through English. No script required—perfect for
+                    professionals, students, and travelers who need fast, real-world results.
                 </p>
                 <Link href="/course" className={`btn-primary ${styles.cta}`}>
                     Start Free lesson
