@@ -79,6 +79,19 @@
     font-weight: 600;
 }
 
+/* Video Section for SEO */
+.videoSection {
+    margin-bottom: 3rem;
+}
+
+.videoCaption {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    padding-left: 0.25rem;
+}
+
 /* Video Wrapper for 16:9 Aspect Ratio */
 .videoWrapper {
     position: relative;
@@ -88,7 +101,6 @@
     overflow: hidden;
     border-radius: 12px;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    margin-bottom: 3rem;
     background-color: #000;
 }
 

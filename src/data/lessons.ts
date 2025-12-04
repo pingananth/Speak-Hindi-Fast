@@ -150,15 +150,46 @@ export const lessons: Lesson[] = [
 </ul>
         `
     },
-    /*
     {
         id: 5,
-        slug: "present-tense-verbs",
-        title: "Present Tense Verbs",
-        description: "Master the present tense. Learn how to conjugate common verbs like 'to be', 'to eat', and 'to go'.",
-        duration: 25,
+        slug: "simple-present-tense-in-hindi",
+        title: "Simple Present Tense in Hindi: Examples & Practice for Beginners",
+        description: "Learn simple present tense in Hindi with easy examples in English. Master Hindi present tense verb conjugation for daily conversations. Perfect for spoken Hindi beginners!",
+        duration: 5,
         introduction: "Conjugating verbs in present tense.",
-        vimeoId: "76979871",
-        notes: "Notes for verbs."
-    },*/
+        vimeoId: "1143380070",
+        notes: `
+<h3>Activity</h3>
+<ul>
+<li>Download the worksheet and practice the present tense verbs</li>
+<li>Print out the worksheet if possible as most excel will autoprompt the formula</li>
+<li>Observe and practice the present tense verbs</li>
+</ul>
+
+<h3>Spoken Hindi Tip</h3>
+<ul>
+<li>Don't try to find the hindi equivalent for all the words. Start with replacing the known verbs first.</li>
+<li>Colloquially while speaking, people use 'na' instead of 'na hai' or 'na hain'or 'nahin'.</li>
+<li>Colloquially while speaking, people won't end the sentences with 'hai' or 'hain' but its implied.</li>
+</ul>
+
+<h3>Quiz</h3>
+<ul>
+<li>Say 'I write poem' in Hindi</li>
+<li>Say 'You stand straight' in Hindi</li>
+<li>Say 'They didn't sit quietly' in Hindi</li>
+</ul>
+        `
+        ,
+        downloads: [
+            {
+                label: "Working Sheet",
+                url: "/downloads/lesson-5-worksheet.xlsx"
+            },
+            {
+                label: "Solution Sheet",
+                url: "/downloads/lesson-5-solutions.xlsx"
+            }
+        ]
+    },
 ];

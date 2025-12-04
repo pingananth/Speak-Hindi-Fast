@@ -97,14 +97,17 @@ export default async function LessonPage({ params }: PageProps) {
 
                 {/* Vimeo Video Widget */}
                 {lesson.vimeoId && (
-                    <div className={styles.videoWrapper}>
-                        <iframe
-                            src={`https://player.vimeo.com/video/${lesson.vimeoId}?badge=0&autopause=0&player_id=0&app_id=58479`}
-                            frameBorder="0"
-                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                            title={lesson.title}
-                        ></iframe>
-                    </div>
+                    <section className={styles.videoSection}>
+                        <h2 className={styles.videoCaption}>Watch: {lesson.title}</h2>
+                        <div className={styles.videoWrapper}>
+                            <iframe
+                                src={`https://player.vimeo.com/video/${lesson.vimeoId}?badge=0&autopause=0&player_id=0&app_id=58479`}
+                                frameBorder="0"
+                                allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                                title={lesson.title}
+                            ></iframe>
+                        </div>
+                    </section>
                 )}
 
                 {/* Notes / Activity Section */}
