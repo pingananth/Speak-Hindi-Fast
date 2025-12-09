@@ -2,6 +2,7 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
+import WhoIsThisFor from "@/components/WhoIsThisFor";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
@@ -69,6 +70,7 @@ export default function Home() {
         <Navbar />
         <Hero />
         <Features />
+        <WhoIsThisFor />
         <Testimonials />
         <FAQ />
         <Footer />

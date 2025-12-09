@@ -1,25 +1,32 @@
 .hero {
     padding: 4rem 0;
-    text-align: center;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 2rem;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.content {
+    flex: 1;
+    text-align: left;
 }
 
 .title {
-    font-size: 3.5rem;
+    font-size: 3rem;
     line-height: 1.2;
     font-weight: 800;
     color: #111827;
-    max-width: 800px;
+    max-width: 600px;
+    margin-bottom: 1.5rem;
 }
 
 .subtext {
     font-size: 1.25rem;
     color: #4b5563;
-    max-width: 600px;
-    line-height: 1.6;
+    max-width: 500px;
+    line-height: 1.7;
+    margin-bottom: 2rem;
 }
 
 .cta {
@@ -27,12 +34,56 @@
     padding: 1rem 2rem;
 }
 
-@media (max-width: 768px) {
-    .title {
-        font-size: 2.5rem;
+.imageWrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heroImage {
+    width: 100%;
+    max-width: 550px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 2.5rem;
     }
 
+    .content {
+        text-align: center;
+    }
+
+    .title {
+        font-size: 2.5rem;
+        max-width: 100%;
+    }
+
+    .subtext {
+        max-width: 100%;
+    }
+
+    .heroImage {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
     .hero {
-        padding: 3rem 0;
+        padding: 2rem 0;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .subtext {
+        font-size: 1.125rem;
     }
 }
