@@ -130,7 +130,7 @@ export const lessons: Lesson[] = [
         id: 4,
         slug: "hindi-sentence-structure",
         title: "Hindi Sentence Structure: SOV Formula",
-        description: "Understand Hindi sentence structure with our simple SOV formula. Learn the 5-part pattern to form Hindi sentences correctly. Master spoken Hindi grammar fast.",
+        description: "Understand Hindi sentence structure with our simple SOV formula. Master spoken Hindi grammar fast.",
         duration: 5,
         introduction: "Learn the difference between English and Hindi structure to learn to speak hindi.",
         vimeoId: "1143176591",
@@ -144,7 +144,6 @@ export const lessons: Lesson[] = [
 <h3>Quiz</h3>
 <ul>
 <li>Is hindi sov or svo? ( SVO = Subject Verb Object & SOV = Subject Object Verb )</li>
-<li>Do you remember the five part formula for hindi sentence formation?</li>
 <li>Map out the hindi sentence formula for 'Hum office jathay hain'/li>
 
 </ul>
@@ -154,7 +153,7 @@ export const lessons: Lesson[] = [
         id: 5,
         slug: "simple-present-tense-in-hindi",
         title: "Simple Present Tense in Hindi: Examples & Practice for Beginners",
-        description: "Learn simple present tense in Hindi with easy examples in English. Master Hindi present tense verb conjugation for daily conversations. Perfect for spoken Hindi beginners!",
+        description: "Learn the present indefinite tense Hindi with easy examples in English. Master Hindi present tense verb conjugation for daily conversations. Perfect for spoken Hindi beginners!",
         duration: 5,
         introduction: "Conjugating verbs in present tense.",
         vimeoId: "1143380070",
@@ -192,4 +191,47 @@ export const lessons: Lesson[] = [
             }
         ]
     },
+
+    {
+        id: 6,
+        slug: "present-continuous-tense-in-hindi",
+        title: "Present Continuous Tense in Hindi: Examples & Rules for Beginners",
+        description: "Learn present continuous tense in Hindi with clear examples. Master Hindi present continuous tense to describe ongoing actions. Includes practice exercises!",
+        duration: 5,
+        introduction: "Learn to describe actions happening right now in Hindi.",
+        vimeoId: "1144827452",
+        notes: `
+<h3>Activity</h3>
+<ul>
+<li>Download the worksheet and practice the present tense verbs</li>
+<li>Print out the worksheet if possible as most excel will autoprompt the formula</li>
+<li>Observe and practice the present tense verbs</li>
+</ul>
+
+<h3>Spoken Hindi Tip</h3>
+<ul>
+<li>Don't try to find the hindi equivalent for all the words. Start with replacing the known verbs first.</li>
+<li>Colloquially while speaking, people use 'na' instead of 'na hai' or 'na hain'or 'nahin'.</li>
+<li>Colloquially while speaking, people won't end the sentences with 'hai' or 'hain' but its implied.</li>
+</ul>
+
+<h3>Quiz</h3>
+<ul>
+<li>Say 'I write poem' in Hindi</li>
+<li>Say 'You stand straight' in Hindi</li>
+<li>Say 'They didn't sit quietly' in Hindi</li>
+</ul>
+        `
+        ,
+        downloads: [
+            {
+                label: "Working Sheet",
+                url: "/downloads/lesson-6-worksheet.xlsx"
+            },
+            {
+                label: "Solution Sheet",
+                url: "/downloads/lesson-6-solutions.xlsx"
+            }
+        ]
+    }
 ];
