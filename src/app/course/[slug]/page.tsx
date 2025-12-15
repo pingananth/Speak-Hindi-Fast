@@ -39,19 +39,7 @@ export default async function LessonPage({ params }: PageProps) {
     const prevLesson = lessons[currentIndex - 1];
     const nextLesson = lessons[currentIndex + 1];
 
-    // JSON-LD Schema for VideoObject
-    const videoSchema = {
-        "@context": "https://schema.org",
-        "@type": "VideoObject",
-        "name": lesson.title,
-        "description": lesson.description,
-        "thumbnailUrl": `https://vumbnail.com/${lesson.vimeoId}.jpg`,
-        "uploadDate": lesson.lastUpdated ? new Date(lesson.lastUpdated).toISOString() : new Date().toISOString(),
-        "contentUrl": `https://player.vimeo.com/video/${lesson.vimeoId}`,
-        "embedUrl": `https://player.vimeo.com/video/${lesson.vimeoId}`,
-    };
-
-    // JSON-LD Schema for LearningResource
+    // JSON-LD Schema for LearningResource with embedded VideoObject
     const learningResourceSchema = {
         "@context": "https://schema.org",
         "@type": "LearningResource",
@@ -60,15 +48,21 @@ export default async function LessonPage({ params }: PageProps) {
         "educationalLevel": "Beginner",
         "learningResourceType": "Video Lesson",
         "timeRequired": `PT${lesson.duration}M`,
+        "video": {
+            "@type": "VideoObject",
+            "name": lesson.title,
+            "description": lesson.description,
+            "thumbnailUrl": `https://vumbnail.com/${lesson.vimeoId}.jpg`,
+            "uploadDate": lesson.lastUpdated ? new Date(lesson.lastUpdated).toISOString() : new Date().toISOString(),
+            "contentUrl": `https://player.vimeo.com/video/${lesson.vimeoId}`,
+            "embedUrl": `https://player.vimeo.com/video/${lesson.vimeoId}`,
+            "duration": `PT${lesson.duration}M`,
+        }
     };
 
     return (
         <>
             {/* JSON-LD Structured Data */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
-            />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(learningResourceSchema) }}
