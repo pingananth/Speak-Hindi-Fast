@@ -39,15 +39,54 @@ export default async function LessonPage({ params }: PageProps) {
     const prevLesson = lessons[currentIndex - 1];
     const nextLesson = lessons[currentIndex + 1];
 
-    // JSON-LD Schema for LearningResource with embedded VideoObject
+    // Breadcrumb Schema
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://speakhindifast.in"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Course",
+                "item": "https://speakhindifast.in/course"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": lesson.title,
+                "item": `https://speakhindifast.in/course/${lesson.slug}`
+            }
+        ]
+    };
+
+    // JSON-LD Schema for LearningResource with embedded VideoObject and enhanced properties
     const learningResourceSchema = {
         "@context": "https://schema.org",
         "@type": "LearningResource",
         "name": lesson.title,
         "description": lesson.description,
+        "url": `https://speakhindifast.in/course/${lesson.slug}`,
         "educationalLevel": "Beginner",
-        "learningResourceType": "Video Lesson",
+        "learningResourceType": ["Video Lesson", "Exercise", "Activity"],
         "timeRequired": `PT${lesson.duration}M`,
+        "inLanguage": "en",
+        "interactivityType": "active",
+        "position": lesson.id,
+        "isPartOf": {
+            "@type": "Course",
+            "name": "Learn Hindi in 30 Days",
+            "url": "https://speakhindifast.in/course",
+            "provider": {
+                "@type": "Organization",
+                "name": "SpeakHindiFast"
+            }
+        },
         "video": {
             "@type": "VideoObject",
             "name": lesson.title,
@@ -57,12 +96,29 @@ export default async function LessonPage({ params }: PageProps) {
             "contentUrl": `https://player.vimeo.com/video/${lesson.vimeoId}`,
             "embedUrl": `https://player.vimeo.com/video/${lesson.vimeoId}`,
             "duration": `PT${lesson.duration}M`,
-        }
+        },
+        ...(lesson.downloads && lesson.downloads.length > 0 && {
+            "associatedMedia": lesson.downloads.map(download => ({
+                "@type": "DigitalDocument",
+                "name": download.label,
+                "url": `https://speakhindifast.in${download.url}`,
+                "fileFormat": download.url.endsWith('.xlsx') ? "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" : "application/pdf"
+            }))
+        }),
+        "teaches": [
+            "Hindi pronunciation",
+            "Conversational Hindi phrases",
+            "Hindi vocabulary through English"
+        ]
     };
 
     return (
         <>
             {/* JSON-LD Structured Data */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(learningResourceSchema) }}
