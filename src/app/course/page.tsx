@@ -1,27 +1,46 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { lessons } from "@/data/lessons";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import NotifyModal from "@/components/NotifyModal";
 import styles from "./course.module.css";
 
+declare global {
+    interface Window {
+        gtag?: (...args: unknown[]) => void;
+    }
+}
+
 export default function CoursePage() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isIndia, setIsIndia] = useState(true);
 
-    const handleCTAClick = () => {
-        setIsModalOpen(true);
+    useEffect(() => {
+        try {
+            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            setIsIndia(tz === "Asia/Kolkata" || tz === "Asia/Calcutta");
+        } catch {
+            setIsIndia(true);
+        }
+    }, []);
 
-        // Track CTA click in GA
-        if (typeof window !== "undefined" && (window as any).gtag) {
-            (window as any).gtag("event", "cta_click", {
-                event_category: "engagement",
-                event_label: "want_more_lessons",
+    const handlePreorderClick = () => {
+        if (typeof window !== "undefined" && window.gtag) {
+            window.gtag("event", "preorder_cta_click", {
+                event_category: "conversion",
+                event_label: isIndia ? "india" : "row",
+                price: isIndia ? "999" : "19",
+                currency: isIndia ? "INR" : "USD",
             });
         }
     };
+
+    const paymentLink = isIndia
+        ? "https://rzp.io/rzp/tkRbcZqM"
+        : "https://polar.sh/checkout/polar_c_ZCD0GfiCQiQEqpbyP3khu6SNbn4EIYetnSRow4AUTOk";
+
+    const price = isIndia ? "₹999" : "$19";
 
     return (
         <>
@@ -59,20 +78,52 @@ export default function CoursePage() {
                     ))}
                 </div>
 
-                {/* CTA Section */}
+                {/* Pre-Order Section */}
                 <div className={styles.ctaSection}>
-                    <h2 className={styles.ctaTitle}>Want More Lessons?</h2>
+                    <span className={styles.badge}>Pre-Order</span>
+                    <h2 className={styles.ctaTitle}>Full Course Dropping 14th April</h2>
                     <p className={styles.ctaText}>
-                        We're adding new lessons regularly. Get notified when they're available!
+                        Get lifetime access at the lowest price. Pre-order now before prices go up.
                     </p>
-                    <button onClick={handleCTAClick} className={styles.ctaButton}>
-                        I Want More Lessons
-                    </button>
+
+                    <p className={styles.nextLessons}>
+                        Next lessons: Other Tenses · More Verbs, Adverbs · Exceptions · Prepositions, Conjunctions, Conjugations, Adjectives and a lot more
+                    </p>
+                    <ul className={styles.perks}>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
+                                <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+                            </svg>
+                            Now at <strong>{price}</strong> — one-time payment
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
+                                <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+                            </svg>
+                            Lifetime access to all videos &amp; future features
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
+                                <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+                            </svg>
+                            Prices will increase post launch
+                        </li>
+                    </ul>
+
+                    <a
+                        href={paymentLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.ctaButton}
+                        onClick={handlePreorderClick}
+                    >
+                        Pre-Order for {price}
+                    </a>
+
                 </div>
             </main>
             <Footer />
-
-            <NotifyModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </>
     );
 }
+

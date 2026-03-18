@@ -23,6 +23,9 @@ export default function Footer() {
                             Copyright Policy
                         </Link>
                     </div>
+                    <div className={styles.attribution}>
+                        SpeakHindiFast is a product from Simul Company
+                    </div>
                 </div>
             </div>
         </footer>
