@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import styles from "./post.module.css";
 import Link from "next/link";
+import BlogCta from "@/components/BlogCta";
 import { Metadata } from "next";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -56,9 +57,13 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
             <div className={styles.cta}>
               <h2>Ready to Speak Hindi Fluently?</h2>
               <p>Join 5,300+ learners who have mastered spoken Hindi without the headache of grammar overload.</p>
-              <Link href="/course" className="btn-primary">
-                Start My 30-Day Journey
-              </Link>
+              <BlogCta
+                href="/course"
+                label="Start My 30-Day Journey"
+                className="btn-primary"
+                postSlug={slug}
+                postTitle={postData.title}
+              />
             </div>
           </div>
         </article>
