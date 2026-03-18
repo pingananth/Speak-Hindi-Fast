@@ -1,0 +1,82 @@
+.postContainer {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.backLink:hover {
+  color: var(--primary-color);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.date {
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.content {
+  line-height: 1.7;
+  font-size: 1.125rem;
+  color: #374151;
+}
+
+.content h1, .content h2, .content h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.content p {
+  margin-bottom: 1.5rem;
+}
+
+.content strong {
+  color: #111827;
+}
+
+.content blockquote {
+  border-left: 4px solid var(--primary-color);
+  padding-left: 1rem;
+  margin-left: 0;
+  font-style: italic;
+  color: #4b5563;
+}
+
+.content hr {
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+  margin: 3rem 0;
+}
+
+.cta {
+  margin-top: 4rem;
+  padding: 3rem;
+  background: #f3f4f6;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.cta h2 {
+  font-size: 1.875rem;
+  margin-bottom: 1rem;
+}
+
+.cta p {
+  margin-bottom: 2rem;
+  color: #4b5563;
+}

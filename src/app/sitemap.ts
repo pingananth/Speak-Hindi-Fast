@@ -1,7 +1,8 @@
 import { MetadataRoute } from 'next';
 import { lessons } from '@/data/lessons';
+import { getSortedPostsData } from '@/lib/blog';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://speakhindifast.in'; // Update with your actual domain
 
     // Static pages
@@ -18,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'weekly' as const,
             priority: 0.9,
         },
+        {
+            url: `${baseUrl}/blog`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly' as const,
+            priority: 0.9,
+        },
     ];
 
     // Dynamic lesson pages
@@ -28,5 +35,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
     }));
 
-    return [...staticPages, ...lessonPages];
+    // Dynamic blog pages
+    const allPosts = await getSortedPostsData();
+    const blogPages = allPosts.map((post: { slug: string; date: string }) => {
+        const postDate = new Date(post.date);
+        const isValidDate = !isNaN(postDate.getTime());
+        
+        return {
+            url: `${baseUrl}/blog/${post.slug}`,
+            lastModified: isValidDate ? postDate : new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.7,
+        };
+    });
+
+    return [...staticPages, ...lessonPages, ...blogPages];
 }
