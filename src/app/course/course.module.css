@@ -59,7 +59,25 @@
   color: var(--primary-color);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 0.75rem;
+}
+
+.lockIcon {
+  color: #ef4444; /* Red for paid */
+}
+
+.authIcon {
+  color: #f59e0b; /* Amber/Yellow for auth-gated */
+}
+
+.freeIcon {
+  color: #10b981; /* Green for public */
 }
 
 .lessonTitle {

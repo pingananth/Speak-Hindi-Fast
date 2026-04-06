@@ -1,7 +1,7 @@
 import { lessons } from "@/data/lessons";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import DownloadButton from "@/components/DownloadButton";
+import GatedLessonContent from "@/components/GatedLessonContent";
 import styles from "./lesson.module.css";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -136,7 +136,7 @@ export default async function LessonPage({ params }: PageProps) {
                     </div>
                 </div>
 
-                {/* Introduction Section */}
+                {/* Introduction Section (Always visible for SEO/Preview) */}
                 <section className={styles.section}>
                     <div className={styles.sectionTitle}>Introduction</div>
                     <div
@@ -145,42 +145,8 @@ export default async function LessonPage({ params }: PageProps) {
                     />
                 </section>
 
-                {/* Vimeo Video Widget */}
-                {lesson.vimeoId && (
-                    <section className={styles.videoSection}>
-                        <h2 className={styles.videoCaption}>Watch: {lesson.title}</h2>
-                        <div className={styles.videoWrapper}>
-                            <iframe
-                                src={`https://player.vimeo.com/video/${lesson.vimeoId}?badge=0&autopause=0&player_id=0&app_id=58479`}
-                                frameBorder="0"
-                                allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                                title={lesson.title}
-                            ></iframe>
-                        </div>
-                    </section>
-                )}
-
-                {/* Notes / Activity Section */}
-                <section className={styles.section}>
-                    <div className={styles.sectionTitle}>Notes & Activities</div>
-                    <div
-                        className={styles.content}
-                        dangerouslySetInnerHTML={{ __html: lesson.notes || "<p>No notes available.</p>" }}
-                    />
-
-                    {/* Downloads Section */}
-                    {lesson.downloads && lesson.downloads.length > 0 && (
-                        <div className={styles.downloads}>
-                            {lesson.downloads.map((download, index) => (
-                                <DownloadButton
-                                    key={index}
-                                    label={download.label}
-                                    url={download.url}
-                                />
-                            ))}
-                        </div>
-                    )}
-                </section>
+                {/* Gated Content (Video, Notes, Downloads) */}
+                <GatedLessonContent lesson={lesson} />
 
                 {/* Navigation */}
                 <div className={styles.navigation}>
@@ -205,3 +171,4 @@ export default async function LessonPage({ params }: PageProps) {
         </>
     );
 }
+
