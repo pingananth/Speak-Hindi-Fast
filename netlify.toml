@@ -1,0 +1,15 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NPM_FLAGS = "--legacy-peer-deps"
+
+[context.production]
+  command = "npm install --legacy-peer-deps && npm run build"
+
+[context.staging]
+  command = "npm install --legacy-peer-deps && npm run build"
+
+[context.deploy-preview]
+  command = "npm install --legacy-peer-deps && npm run build"
