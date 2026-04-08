@@ -14,13 +14,26 @@ export default function SyncUser() {
     const storeUser = useMutation(api.users.storeUser);
 
     useEffect(() => {
+        console.log("🔄 SyncUser mounted. isLoaded:", isLoaded, "isSignedIn:", isSignedIn);
+        
         if (isLoaded && isSignedIn && user) {
+            console.log("🚀 SyncUser: Attempting to sync user to Convex:", user.emailAddresses[0].emailAddress);
+            
             storeUser({
                 email: user.emailAddresses[0].emailAddress,
                 name: user.fullName || undefined,
-            }).catch(console.error);
+            })
+            .then((id) => {
+                console.log("✅ SyncUser: Successfully stored user in Convex. ID:", id);
+            })
+            .catch((err) => {
+                console.error("❌ SyncUser: Failed to store user in Convex:", err);
+            });
+        } else if (isLoaded && !isSignedIn) {
+            console.log("ℹ️ SyncUser: User is not signed in.");
         }
     }, [isLoaded, isSignedIn, user, storeUser]);
 
     return null;
 }
+
