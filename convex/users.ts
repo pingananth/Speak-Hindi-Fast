@@ -12,18 +12,10 @@ export const storeUser = mutation({
     },
     handler: async (ctx, args) => {
         const identity = await ctx.auth.getUserIdentity();
-        console.log("🛠️ storeUser mutation: Identity is:", identity ? "VERIFIED" : "NULL");
         
         if (!identity) {
-            console.error("❌ storeUser mutation: Failed because identity is NULL. Verify Clerk JWT template 'convex'.");
             throw new Error("Called storeUser without authentication");
         }
-
-        console.log("👤 User details from token:", {
-            tokenIdentifier: identity.tokenIdentifier,
-            name: identity.name,
-            email: identity.email,
-        });
 
         // Check if the user already exists
         const user = await ctx.db
