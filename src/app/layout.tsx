@@ -5,6 +5,7 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 import FeedbackWidget from "@/components/FeedbackWidget";
 import ConvexClientProvider from "@/components/ConvexClientProvider";
+import AmplitudeInit from "@/components/AmplitudeInit";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -43,10 +44,12 @@ export default function RootLayout({
         className={`${inter.variable} ${poppins.variable} ${roboto.variable} antialiased`}
       >
         <ConvexClientProvider>
+          <AmplitudeInit />
           <GoogleAnalytics />
           {children}
           <FeedbackWidget />
         </ConvexClientProvider>
+
       </body>
     </html>
   );

@@ -9,6 +9,8 @@ import { Lock, Mail, ChevronRight } from "lucide-react";
 import styles from "./GatedLessonContent.module.css";
 import DownloadButton from "./DownloadButton";
 import Link from "next/link";
+import { track } from "@amplitude/unified";
+import { useEffect } from "react";
 
 interface GatedLessonContentProps {
     lesson: Lesson;
@@ -19,7 +21,21 @@ export default function GatedLessonContent({ lesson }: GatedLessonContentProps) 
     const user = useQuery(api.users.currentUser);
     const isPro = user?.isPro ?? false;
 
+    // Track Lesson Viewed on mount
+    useEffect(() => {
+        if (isAuthLoaded) {
+            track("Lesson Viewed", {
+                lessonId: lesson.id,
+                lessonTitle: lesson.title,
+                isGated: lesson.id >= AUTH_GATED_LESSON_ID,
+                isPurchased: isPro,
+                isSignedIn: !!isSignedIn
+            });
+        }
+    }, [isAuthLoaded, lesson.id, lesson.title, isPro, isSignedIn]);
+
     const isAuthGated = lesson.id === AUTH_GATED_LESSON_ID;
+
     const isPaidGated = lesson.id >= PAID_LESSON_START_ID;
 
     // Access Logic
@@ -45,7 +61,11 @@ export default function GatedLessonContent({ lesson }: GatedLessonContentProps) 
                             <p className={styles.lockedText}>
                                 This lesson is part of the Full Course. Pre-order now to get lifetime access to all lessons dropping on April 14th.
                             </p>
-                            <Link href="/course" className={styles.ctaButton}>
+                            <Link 
+                                href="/course" 
+                                className={styles.ctaButton}
+                                onClick={() => track("Pre-order Clicked", { lessonId: lesson.id, lessonTitle: lesson.title })}
+                            >
                                 View Pre-order Details
                             </Link>
                         </>
@@ -59,7 +79,10 @@ export default function GatedLessonContent({ lesson }: GatedLessonContentProps) 
                                 This lesson is free! Just sign in with your email to unlock the video and study materials.
                             </p>
                             <SignInButton mode="modal">
-                                <button className={styles.ctaButton}>
+                                <button 
+                                    className={styles.ctaButton}
+                                    onClick={() => track("Sign In Started", { lessonId: lesson.id, lessonTitle: lesson.title })}
+                                >
                                     Sign In to Unlock <ChevronRight size={20} />
                                 </button>
                             </SignInButton>
