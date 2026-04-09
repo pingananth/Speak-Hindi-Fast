@@ -14,9 +14,11 @@ export default function AmplitudeInit() {
     useEffect(() => {
         // Strict initialization as per documentation
         if (typeof window !== "undefined" && !isInitialized) {
+            const apiKey = process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY!;
             console.log("📊 Initializing Amplitude Unified SDK...");
-            initAll('58421a302bbbb09dd168b75d9472daf6', {
+            initAll(apiKey, {
                 "analytics": {
+
                     "autocapture": true
                 },
                 "sessionReplay": {

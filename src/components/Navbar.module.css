@@ -59,12 +59,53 @@
     opacity: 0.9;
 }
 
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    z-index: 1001;
+}
+
 @media (max-width: 768px) {
-    .menu {
-        display: none;
+    .hamburger {
+        display: block;
     }
-    
+
     .navRight {
-        gap: 1rem;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        justify-content: center;
+        gap: 3rem;
+        transition: right 0.3s ease-in-out;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        padding: 2rem;
     }
-}
+
+    .navRight.active {
+        right: 0;
+    }
+
+    .menu {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        display: flex; /* Override previous display: none */
+    }
+
+    .link {
+        font-size: 1.25rem;
+    }
+
+    .logo {
+        z-index: 1001;
+    }
+}
+
