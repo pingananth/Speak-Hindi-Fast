@@ -19,12 +19,14 @@ export interface Lesson {
         transliteration: string;
     }>;
     questions?: Array<{
+        emoji?: string; // Optional emoji for visual aid
         english: string;
         hindi: string;
         hindiAudio?: string; // Devanagari script for TTS
         englishExample: string;
         hindiExample: string;
     }>;
+
 
 }
 

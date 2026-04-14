@@ -3,12 +3,14 @@ import styles from "./QuestionTable.module.css";
 import { Volume2 } from "lucide-react";
 
 interface QuestionItem {
+    emoji?: string;
     english: string;
     hindi: string;
     hindiAudio?: string;
     englishExample: string;
     hindiExample: string;
 }
+
 
 interface QuestionTableProps {
     questions: QuestionItem[];
@@ -37,8 +39,12 @@ const QuestionTable: React.FC<QuestionTableProps> = ({ questions }) => {
                 {questions.map((item, index) => (
                     <div key={index} className={styles.row}>
                         <div className={styles.cell} data-label="English">
-                            <span className={styles.mainText}>{item.english}</span>
+                            <span className={styles.mainText}>
+                                {item.emoji && <span className={styles.emoji}>{item.emoji} </span>}
+                                {item.english}
+                            </span>
                         </div>
+
                         <div className={styles.cell} data-label="Hindi">
                             <span className={styles.hindiText}>{item.hindi}</span>
                         </div>

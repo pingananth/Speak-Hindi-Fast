@@ -74,9 +74,16 @@
 }
 
 .mainText {
-    font-weight: 600;
-    color: #111827;
+    font-weight: 500;
+    color: var(--text-color);
 }
+
+.emoji {
+    font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Android Emoji", sans-serif;
+    margin-right: 0.4rem;
+    font-size: 1.2rem;
+}
+
 
 .hindiText {
     font-weight: 600;
