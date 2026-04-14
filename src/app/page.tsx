@@ -16,9 +16,10 @@ export default function Home() {
     "logo": "https://speakhindifast.in/icon.svg",
     "description": "Learn to speak Hindi fluently in 30 days with our structured formula-based approach.",
     "sameAs": [
-      // Add your social media URLs here when available
+      "https://www.instagram.com/speakhindifast/"
     ]
   };
+
 
   const websiteSchema = {
     "@context": "https://schema.org",

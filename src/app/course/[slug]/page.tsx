@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import { lessons } from "@/data/lessons";
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GatedLessonContent from "@/components/GatedLessonContent";
@@ -146,7 +148,10 @@ export default async function LessonPage({ params }: PageProps) {
                 </section>
 
                 {/* Gated Content (Video, Notes, Downloads) */}
-                <GatedLessonContent lesson={lesson} />
+                <Suspense fallback={<div className={styles.loading}>Loading content...</div>}>
+                    <GatedLessonContent lesson={lesson} />
+                </Suspense>
+
 
                 {/* Navigation */}
                 <div className={styles.navigation}>

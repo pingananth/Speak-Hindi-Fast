@@ -1,0 +1,133 @@
+.wrapper {
+    width: 100%;
+    background: white;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    margin: 1.5rem 0;
+}
+
+.tableHeader {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.5fr 1.5fr 1.5fr;
+    background: #f9fafb;
+    border-bottom: 2px solid #e5e7eb;
+    padding: 1rem;
+}
+
+.headerCell {
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.tableBody {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.5fr 1.5fr 1.5fr;
+    padding: 1rem;
+    border-bottom: 1px solid #f3f4f6;
+    align-items: center;
+}
+
+.playButton {
+    background: #fdf2f8;
+    border: none;
+    color: #db2777;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.playButton:hover {
+    background: #fbcfe8;
+    transform: scale(1.1);
+}
+
+.noAudio {
+    color: #9ca3af;
+    font-size: 0.875rem;
+}
+
+
+.row:last-child {
+    border-bottom: none;
+}
+
+.row:hover {
+    background: #fdf2f8; /* Very light pink background on hover */
+}
+
+.cell {
+    padding-right: 1rem;
+}
+
+.mainText {
+    font-weight: 600;
+    color: #111827;
+}
+
+.hindiText {
+    font-weight: 600;
+    color: #db2777; /* Pink accent for Hindi */
+}
+
+.exampleText {
+    font-size: 0.9375rem;
+    color: #4b5563;
+    font-style: italic;
+}
+
+.hindiExampleText {
+    font-size: 0.9375rem;
+    color: #111827;
+    font-weight: 500;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .tableHeader {
+        display: none; /* Hide real headers on mobile */
+    }
+
+    .row {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        padding: 1.5rem;
+    }
+
+    .cell {
+        display: flex;
+        flex-direction: column;
+        padding-right: 0;
+    }
+
+    .cell::before {
+        content: attr(data-label);
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #9ca3af;
+        margin-bottom: 0.25rem;
+        letter-spacing: 0.05em;
+    }
+
+    .mainText, .hindiText {
+        font-size: 1.125rem;
+    }
+
+    .exampleText, .hindiExampleText {
+        font-size: 1rem;
+    }
+}

@@ -1,5 +1,6 @@
 import styles from "./Footer.module.css";
 import Link from "next/link";
+import { Instagram } from "lucide-react";
 
 export default function Footer() {
     return (
@@ -22,6 +23,15 @@ export default function Footer() {
                         <Link href="/copyright" className={styles.link}>
                             Copyright Policy
                         </Link>
+                        <a 
+                            href="https://www.instagram.com/speakhindifast/" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className={styles.socialLink}
+                        >
+                            <Instagram size={18} />
+                            <span>Follow us on Instagram</span>
+                        </a>
                     </div>
                     <div className={styles.attribution}>
                         SpeakHindiFast is a product from Simul Company
@@ -31,3 +41,4 @@ export default function Footer() {
         </footer>
     );
 }
+

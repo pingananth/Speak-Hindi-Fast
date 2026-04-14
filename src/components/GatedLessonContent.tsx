@@ -11,15 +11,24 @@ import DownloadButton from "./DownloadButton";
 import Link from "next/link";
 import { track } from "@amplitude/unified";
 import { useEffect } from "react";
+import VocabularyTable from "./VocabularyTable";
+import QuestionTable from "./QuestionTable";
+
+import { useSearchParams } from "next/navigation";
 
 interface GatedLessonContentProps {
+
     lesson: Lesson;
 }
 
 export default function GatedLessonContent({ lesson }: GatedLessonContentProps) {
     const { isSignedIn, isLoaded: isAuthLoaded } = useAuth();
+    const searchParams = useSearchParams();
     const user = useQuery(api.users.currentUser);
     const isPro = user?.isPro ?? false;
+
+    // Local Testing Bypass: Add ?testPro=true to the URL in dev mode to skip the license check
+    const isTestPro = process.env.NODE_ENV === "development" && searchParams.get("testPro") === "true";
 
     // Track Lesson Viewed on mount
     useEffect(() => {
@@ -28,11 +37,12 @@ export default function GatedLessonContent({ lesson }: GatedLessonContentProps) 
                 lessonId: lesson.id,
                 lessonTitle: lesson.title,
                 isGated: lesson.id >= AUTH_GATED_LESSON_ID,
-                isPurchased: isPro,
-                isSignedIn: !!isSignedIn
+                isPurchased: isPro || isTestPro,
+                isSignedIn: !!isSignedIn,
+                isTestBypass: isTestPro
             });
         }
-    }, [isAuthLoaded, lesson.id, lesson.title, isPro, isSignedIn]);
+    }, [isAuthLoaded, lesson.id, lesson.title, isPro, isSignedIn, isTestPro]);
 
     const isAuthGated = lesson.id === AUTH_GATED_LESSON_ID;
 
@@ -42,11 +52,12 @@ export default function GatedLessonContent({ lesson }: GatedLessonContentProps) 
     const hasAccess = 
         (!isAuthGated && !isPaidGated) || // Public
         (isAuthGated && isSignedIn) ||     // Auth-gated & Signed In
-        (isPaidGated && isPro);            // Paid-gated & Is Pro
+        (isPaidGated && (isPro || isTestPro));            // Paid-gated & (Is Pro or Test Bypass)
 
-    if (!isAuthLoaded) {
+    if (!isAuthLoaded && !isTestPro) {
         return <div className={styles.loading}>Checking access...</div>;
     }
+
 
     if (!hasAccess) {
         return (
@@ -59,15 +70,16 @@ export default function GatedLessonContent({ lesson }: GatedLessonContentProps) 
                             </div>
                             <h2 className={styles.lockedTitle}>Premium Lesson</h2>
                             <p className={styles.lockedText}>
-                                This lesson is part of the Full Course. Pre-order now to get lifetime access to all lessons dropping on April 14th.
+                                This lesson is part of the Full Course. Enroll now to get instant lifetime access to all lessons and study materials.
                             </p>
                             <Link 
                                 href="/course" 
                                 className={styles.ctaButton}
-                                onClick={() => track("Pre-order Clicked", { lessonId: lesson.id, lessonTitle: lesson.title })}
+                                onClick={() => track("Enroll Clicked", { lessonId: lesson.id, lessonTitle: lesson.title })}
                             >
-                                View Pre-order Details
+                                View Enrollment Details
                             </Link>
+
                         </>
                     ) : (
                         <>
@@ -110,7 +122,24 @@ export default function GatedLessonContent({ lesson }: GatedLessonContentProps) 
                 </section>
             )}
 
+            {/* Vocabulary Table Section */}
+            {lesson.vocabulary && lesson.vocabulary.length > 0 && (
+                <section className={styles.section}>
+                    <div className={styles.sectionTitle}>Vocabulary & Pronunciation</div>
+                    <VocabularyTable vocabulary={lesson.vocabulary} />
+                </section>
+            )}
+
+            {/* Question/Example Table Section */}
+            {lesson.questions && lesson.questions.length > 0 && (
+                <section className={styles.section}>
+                    <div className={styles.sectionTitle}>Question Verbs & Examples</div>
+                    <QuestionTable questions={lesson.questions} />
+                </section>
+            )}
+
             {/* Notes / Activity Section */}
+
             <section className={styles.section}>
                 <div className={styles.sectionTitle}>Notes & Activities</div>
                 <div

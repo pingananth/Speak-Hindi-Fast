@@ -6,7 +6,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "Thank You | SpeakHindiFast",
-    description: "Your pre-order was successful. Full course launches on 14th April.",
+    description: "Your enrollment was successful. Welcome to the course!",
 };
 
 export default function ThankYouPage() {
@@ -21,18 +21,19 @@ export default function ThankYouPage() {
                         </svg>
                     </div>
 
-                    <h1 className={styles.title}>Payment Successful!</h1>
+                    <h1 className={styles.title}>Welcome Aboard!</h1>
 
                     <p className={styles.message}>
-                        Thank you for pre-ordering. Details will be emailed to the email ID you provided during checkout.
+                        Thank you for enrolling! Your payment was successful and you now have full access to the Speak Hindi Fast course.
                     </p>
 
                     <div className={styles.info}>
                         <div className={styles.infoItem}>
-                            <span className={styles.infoLabel}>Full course launches on</span>
-                            <span className={styles.infoValue}>14th April 2026</span>
+                            <span className={styles.infoLabel}>Status</span>
+                            <span className={styles.infoValue}>Instant Access Enabled</span>
                         </div>
                     </div>
+
 
                     <p className={styles.support}>
                         For any questions or support, reach out to{" "}

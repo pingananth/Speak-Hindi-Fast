@@ -1,0 +1,101 @@
+.tableWrapper {
+    width: 100%;
+    margin: 2rem 0;
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background: white;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 600px;
+}
+
+.table th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    padding: 1rem;
+    border-bottom: 2px solid #e2e8f0;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+}
+
+.table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    color: #1e293b;
+    vertical-align: middle;
+}
+
+.row:hover {
+    background-color: #f1f5f9;
+}
+
+.emojiCell {
+    font-size: 1.5rem;
+    text-align: center;
+    width: 60px;
+}
+
+.hindiCell {
+    font-weight: 600;
+    color: #ef4444; /* Premium red accent from logo */
+    font-size: 1.1rem;
+}
+
+.translitCell {
+    color: #64748b;
+    font-style: italic;
+}
+
+.playButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 40px;
+    height: 40px;
+}
+
+.playButton:hover {
+    background-color: #dc2626;
+    transform: scale(1.1);
+}
+
+.playButton:active {
+    transform: scale(0.95);
+}
+
+/* Dark mode adjustments if applicable */
+@media (prefers-color-scheme: dark) {
+    .tableWrapper {
+        background: #1e293b;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    }
+    .table th {
+        background-color: #334155;
+        color: #e2e8f0;
+        border-bottom-color: #475569;
+    }
+    .table td {
+        color: #f1f5f9;
+        border-bottom-color: #334155;
+    }
+    .row:hover {
+        background-color: #334155;
+    }
+    .translitCell {
+        color: #94a3b8;
+    }
+}

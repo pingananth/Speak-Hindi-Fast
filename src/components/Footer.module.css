@@ -33,6 +33,22 @@
     color: white;
 }
 
+.socialLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #f472b6; /* Lighter pink for Instagram */
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.socialLink:hover {
+    color: #ec4899; /* Stronger pink on hover */
+    transform: translateY(-1px);
+}
+
+
 @media (max-width: 640px) {
     .content {
         flex-direction: column;

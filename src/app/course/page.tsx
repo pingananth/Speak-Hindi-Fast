@@ -8,9 +8,19 @@ import Footer from "@/components/Footer";
 import styles from "./course.module.css";
 import { AUTH_GATED_LESSON_ID, PAID_LESSON_START_ID } from "@/config/lessons";
 import { Lock, Mail, PlayCircle } from "lucide-react";
-import { useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
-import { useAuth } from "@clerk/nextjs";
+
+const syllabusItems = [
+    "Pronouns", "Basic Hindi Verbs", "Action / Command Words", "Sentence Structure",
+    "Simple Present tense", "Present Continuous tense", "Past Continuous tense", "Simple Past tense",
+    "Future tense", "Tense Exceptions", "Question Verbs", "Additional Verbs",
+    "Case Ending", "Usage of Nay", "Usage of Sak, Sukh, lag, wala", "Days of the week",
+    "Numbers", "Ordinals", "Fractions", "Relationship",
+    "Parts of the Body", "Adjective", "Adverb", "Conjuction",
+    "Post position", "Doubtful Present", "Doubtful Past", "General Vocab 1",
+    "General Vocab 2", "Vegetables", "Flowers", "Fruits",
+    "Animals", "Domestic Animals", "Wild Animals", "Minerals",
+    "Transport", "Colour", "Directions"
+];
 
 declare global {
     interface Window {
@@ -47,8 +57,29 @@ export default function CoursePage() {
 
     const price = isIndia ? "₹999" : "$19";
 
+    // ItemList Schema for the curriculum
+    const itemListSchema = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Hindi Course Curriculum",
+        "description": "A structured 30-day Hindi speaking curriculum.",
+        "numberOfItems": lessons.length,
+        "itemListElement": lessons.map((lesson, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "name": lesson.title,
+            "url": `https://speakhindifast.in/course/${lesson.slug}`
+        }))
+    };
+
     return (
         <>
+            {/* JSON-LD Structured Data */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+            />
+
             <Navbar />
             <main className={styles.container}>
                 <div className={styles.header}>
@@ -97,17 +128,38 @@ export default function CoursePage() {
                     })}
                 </div>
 
-                {/* Pre-Order Section */}
+                <div className={styles.syllabusSection}>
+                    <h2 className={styles.syllabusTitle}>Full Course Syllabus</h2>
+                    <div className={styles.syllabusGrid}>
+                        {syllabusItems.map((item, index) => {
+                            // Simple logic to check if a lesson exists in our data
+                            // Lowercase match for safety
+                            const isImplemented = lessons.some(l => 
+                                l.title.toLowerCase().includes(item.toLowerCase()) || 
+                                item.toLowerCase().includes(l.title.toLowerCase().split(':')[0].trim())
+                            );
+
+                            return (
+                                <div key={index} className={styles.syllabusItem} style={{ opacity: isImplemented ? 1 : 0.7 }}>
+                                    <div className={styles.syllabusDot}></div>
+                                    <span>
+                                        {item}
+                                        {!isImplemented && <span className={styles.comingSoon}>Coming Soon</span>}
+                                    </span>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+
+
                 <div className={styles.ctaSection}>
-                    <span className={styles.badge}>Pre-Order</span>
-                    <h2 className={styles.ctaTitle}>Full Course Dropping 14th April</h2>
+                    <span className={styles.badge}>Live</span>
+                    <h2 className={styles.ctaTitle}>Unlock the Full Course Today</h2>
                     <p className={styles.ctaText}>
-                        Get lifetime access at the lowest price. Pre-order now before prices go up.
+                        Get lifetime access to the complete 30-day curriculum and all future updates.
                     </p>
 
-                    <p className={styles.nextLessons}>
-                        Next lessons: Other Tenses · More Verbs, Adverbs · Exceptions · Prepositions, Conjunctions, Conjugations, Adjectives and a lot more
-                    </p>
                     <ul className={styles.perks}>
                         <li>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
@@ -125,7 +177,7 @@ export default function CoursePage() {
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
                                 <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
                             </svg>
-                            Prices will increase post launch
+                            Interactive tables, worksheets & audio support
                         </li>
                     </ul>
 
@@ -136,13 +188,11 @@ export default function CoursePage() {
                         className={styles.ctaButton}
                         onClick={handlePreorderClick}
                     >
-                        Pre-Order for {price}
+                        Enroll Now for {price}
                     </a>
-
                 </div>
             </main>
             <Footer />
         </>
     );
 }
-
